@@ -32,7 +32,7 @@ var inline = require('gulp-inline');
 
 //main task for building production dir
 gulp.task('build', function (callback) {
-    runSequence('clean',['responsive-jpg', 'responsive-webp'], 'scripts'), callback
+    runSequence('clean', 'scripts'), callback
 });
 
 //delete build to start over from scratch
@@ -44,58 +44,6 @@ gulp.task('clean', function () {
 //to reload the project without building all over again
 gulp.task('dev', function (callback) {
     runSequence('scripts'), callback
-});
-
-// =======================================================================// 
-//                  Images and fonts                                      //        
-// =======================================================================//  
-
-
-gulp.task('webp', () =>
-    gulp.src('src/img/*.jpg')
-    .pipe(webp())
-    .pipe(gulp.dest('src/img'))
-);
-
-
-gulp.task('responsive-jpg', function () {
-    gulp.src(['src/img/**/*'])
-        .pipe(responsive({
-            '*.jpg': [{
-                    width: 1600,
-                    quality: 40
-                },
-                {
-                    width: 800,
-                    quality: 70
-                },
-                {
-                    width: 550,
-                    quality: 100
-                }
-            ]
-        }))
-        .pipe(gulp.dest('build/img'));
-});
-
-gulp.task('responsive-webp', function () {
-    gulp.src(['src/img/**/*'])
-        .pipe(responsive({
-            '*.webp': [{
-                    width: 1600,
-                    quality: 40
-                },
-                {
-                    width: 800,
-                    quality: 70
-                },
-                {
-                    width: 550,
-                    quality: 80
-                }
-            ]
-        }))
-        .pipe(gulp.dest('build/img'));
 });
 
 // =======================================================================// 
